@@ -4,19 +4,19 @@ from Crypto.Hash import SHA256
 from base64 import b64encode
 import binascii
 import json
-#Q4 Pay-to-Pubkey-Hash
+#Pay-to-Pubkey-Hash
 with open("Transaction_Format.JSON") as f:
-  assignment2_json = json.load(f) #Load the JSON
+  transaction_json = json.load(f) #Load the JSON
 
 stack = [] #Stack
 print("\n------\nStack Length "+str(len(stack))+"\n------\n")
 
 #<sig> <pubKey>:
-stack.append(assignment2_json["Sig"]) # JSON Sig is in Hex format
+stack.append(transaction_json["Sig"]) # JSON Sig is in Hex format
 stack[0] = stack[0][2:] # Remove 0x Hex format
 stack[0] = binascii.unhexlify(stack[0]) #Unhexifiy
 
-stack.append(assignment2_json["pubkey"]) #JSON pubKey is in HEX format
+stack.append(transaction_json["pubkey"]) #JSON pubKey is in HEX format
 stack[1] = int(stack[1],16) # Convert Hex to Integer
 print("\n------\nStack Length "+str(len(stack))+"\n[0]Sig: "+ str(stack[0]) + "\n[1]pubkey: "+ str(stack[1])+"\n------\n")
 
@@ -32,7 +32,7 @@ stack[2] =  binascii.unhexlify(hash_pub_key[-40:])   # Only adds the 160 least s
 print("\n------\nStack Length "+str(len(stack))+"\n[0]Sig: "+ str(stack[0]) + "\n[1]pubkey: "+ str(stack[1])+"\n[2]pubHashA: "+ str(stack[2])+"\n------\n")
 
 # <pubKeyHash>
-stack.append(assignment2_json["pubKeyHash"]) #JSON pubKeyHash is in HEX format
+stack.append(transaction_json["pubKeyHash"]) #JSON pubKeyHash is in HEX format
 stack[3] = stack[3][2:] # Remove 0x Hex format
 stack[3] = binascii.unhexlify(stack[3]) # remove leading 0x
 print("\n------\nStack Length "+str(len(stack))+"\n[0]Sig: "+ str(stack[0]) + "\n[1]pubkey: "+ str(stack[1])+"\n[2]pubHashA: "+ str(stack[2])+"\n[3]pubKeyHash: "+ str(stack[3])+"\n------\n")
@@ -50,7 +50,7 @@ else:
 
 # OP_CHECKSIG Signature is checked for top two stack items.
 #Converting all the Hex (0x...) into ints
-tup = [int(stack[1]), int(assignment2_json["DSAParam"][0],16), int(assignment2_json["DSAParam"][1],16), int(assignment2_json["DSAParam"][2],16)]
+tup = [int(stack[1]), int(transaction_json["DSAParam"][0],16), int(transaction_json["DSAParam"][1],16), int(transaction_json["DSAParam"][2],16)]
 
 
 pub_key = DSA.construct(tup)
