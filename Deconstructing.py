@@ -54,7 +54,7 @@ tup = [int(stack[1]), int(assignment2_json["DSAParam"][0],16), int(assignment2_j
 
 
 pub_key = DSA.construct(tup)
-hash_obj = SHA256.new(b"CSCI301 Contemporary topic in security")
+hash_obj = SHA256.new(b"Cybersecurity is cool!")
 verifier = DSS.new(pub_key, 'fips-186-3')
 try:
   verifier.verify(hash_obj, stack[0]) 
