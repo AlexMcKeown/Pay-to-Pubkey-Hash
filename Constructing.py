@@ -8,7 +8,7 @@ import json
 def formatHex(temp_key):
     return "\""+hex(temp_key)+"\""
 
-file_in = open("Assignment2.JSON","r+")
+file_in = open("Transaction_Format.JSON","r+")
 content = file_in.read()
 
 #Q1 DSAParam & pubkey
