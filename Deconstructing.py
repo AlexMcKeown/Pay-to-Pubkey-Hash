@@ -5,7 +5,7 @@ from base64 import b64encode
 import binascii
 import json
 #Q4 Pay-to-Pubkey-Hash
-with open("Assignment2.JSON") as f:
+with open("Transaction_Format.JSON") as f:
   assignment2_json = json.load(f) #Load the JSON
 
 stack = [] #Stack
